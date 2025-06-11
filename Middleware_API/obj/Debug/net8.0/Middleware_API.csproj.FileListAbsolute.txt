@@ -35,3 +35,4 @@ C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\refint\
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.genruntimeconfig.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\ref\Middleware_API.dll
+C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.sourcelink.json

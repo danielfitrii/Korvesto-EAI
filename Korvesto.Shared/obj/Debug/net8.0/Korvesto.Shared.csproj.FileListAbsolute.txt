@@ -9,3 +9,4 @@ C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korves
 C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\refint\Korvesto.Shared.dll
 C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\ref\Korvesto.Shared.dll
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.sourcelink.json

@@ -35,3 +35,4 @@ C:\Users\danie\source\repos\Korvesto_EAI\POS_API\obj\Debug\net8.0\POS_API.genrun
 C:\Users\danie\source\repos\Korvesto_EAI\POS_API\obj\Debug\net8.0\ref\POS_API.dll
 C:\Users\danie\source\repos\Korvesto_EAI\POS_API\bin\Debug\net8.0\Korvesto.Shared.dll
 C:\Users\danie\source\repos\Korvesto_EAI\POS_API\bin\Debug\net8.0\Korvesto.Shared.pdb
+C:\Users\danie\source\repos\Korvesto_EAI\POS_API\obj\Debug\net8.0\POS_API.sourcelink.json

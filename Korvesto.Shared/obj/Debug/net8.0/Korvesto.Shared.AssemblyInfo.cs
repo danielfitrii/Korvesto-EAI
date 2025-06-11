@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04feb4da2d9b6ddc8c08649c53dbf6724ced6d2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

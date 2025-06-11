@@ -35,3 +35,4 @@ C:\Users\danie\source\repos\Korvesto_EAI\CRM_API\obj\Debug\net8.0\refint\CRM_API
 C:\Users\danie\source\repos\Korvesto_EAI\CRM_API\obj\Debug\net8.0\CRM_API.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\CRM_API\obj\Debug\net8.0\CRM_API.genruntimeconfig.cache
 C:\Users\danie\source\repos\Korvesto_EAI\CRM_API\obj\Debug\net8.0\ref\CRM_API.dll
+C:\Users\danie\source\repos\Korvesto_EAI\CRM_API\obj\Debug\net8.0\CRM_API.sourcelink.json

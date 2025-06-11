@@ -23,10 +23,10 @@ namespace CRM_API.Controllers
             return customer == null ? NotFound() : Ok(customer);
         }
 
-        [HttpPost("{customerName}/add-points/{points}")]
-        public IActionResult AddPoints(string customerName, int points)
+        [HttpPost("{customerId}/add-points/{points}")]
+        public IActionResult AddPoints(string customerId, int points)
         {
-            var customer = _customers.FirstOrDefault(c => c.Name == customerName);
+            var customer = _customers.FirstOrDefault(c => c.CustomerId == customerId);
             if (customer == null) return NotFound("Customer not found.");
 
             customer.LoyaltyPoints += points;
