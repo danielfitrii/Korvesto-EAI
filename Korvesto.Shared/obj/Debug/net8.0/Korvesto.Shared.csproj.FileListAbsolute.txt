@@ -1,0 +1,11 @@
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\bin\Debug\net8.0\Korvesto.Shared.deps.json
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\bin\Debug\net8.0\Korvesto.Shared.dll
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\bin\Debug\net8.0\Korvesto.Shared.pdb
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.AssemblyInfoInputs.cache
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.AssemblyInfo.cs
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.csproj.CoreCompileInputs.cache
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.dll
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\refint\Korvesto.Shared.dll
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\Korvesto.Shared.pdb
+C:\Users\danie\source\repos\Korvesto_EAI\Korvesto.Shared\obj\Debug\net8.0\ref\Korvesto.Shared.dll

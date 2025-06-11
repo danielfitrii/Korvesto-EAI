@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS_API", "POS_API\POS_API.csproj", "{9ACE598A-42C2-4320-AC8A-B7FEEDCDBC37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware_API", "Middleware_API\Middleware_API.csproj", "{71162512-AC38-47BD-993C-D513C7402F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse_API", "Warehouse_API\Warehouse_API.csproj", "{9D86C269-1EED-4B30-9D63-3E2F4BDC7AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_API", "CRM_API\CRM_API.csproj", "{329BD3C2-CE4C-4BF2-84C4-B86808997938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korvesto.Shared", "Korvesto.Shared\Korvesto.Shared.csproj", "{0045C886-C6E0-459D-8941-D0D276EEE8D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS_UI", "POS_UI\POS_UI.csproj", "{561FC791-9285-41D6-92B0-B7C309E57129}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ACE598A-42C2-4320-AC8A-B7FEEDCDBC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ACE598A-42C2-4320-AC8A-B7FEEDCDBC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ACE598A-42C2-4320-AC8A-B7FEEDCDBC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ACE598A-42C2-4320-AC8A-B7FEEDCDBC37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71162512-AC38-47BD-993C-D513C7402F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71162512-AC38-47BD-993C-D513C7402F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71162512-AC38-47BD-993C-D513C7402F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71162512-AC38-47BD-993C-D513C7402F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D86C269-1EED-4B30-9D63-3E2F4BDC7AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D86C269-1EED-4B30-9D63-3E2F4BDC7AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D86C269-1EED-4B30-9D63-3E2F4BDC7AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D86C269-1EED-4B30-9D63-3E2F4BDC7AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329BD3C2-CE4C-4BF2-84C4-B86808997938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329BD3C2-CE4C-4BF2-84C4-B86808997938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329BD3C2-CE4C-4BF2-84C4-B86808997938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329BD3C2-CE4C-4BF2-84C4-B86808997938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0045C886-C6E0-459D-8941-D0D276EEE8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0045C886-C6E0-459D-8941-D0D276EEE8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0045C886-C6E0-459D-8941-D0D276EEE8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0045C886-C6E0-459D-8941-D0D276EEE8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561FC791-9285-41D6-92B0-B7C309E57129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561FC791-9285-41D6-92B0-B7C309E57129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561FC791-9285-41D6-92B0-B7C309E57129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561FC791-9285-41D6-92B0-B7C309E57129}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0109EA6-BEE1-4ED7-A623-AB16A56A4121}
+	EndGlobalSection
+EndGlobal

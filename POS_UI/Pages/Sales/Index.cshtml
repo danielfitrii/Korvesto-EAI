@@ -1,0 +1,48 @@
+@page
+@model POS_UI.Pages.Sales.IndexModel
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<h1 class="mb-4">Sales</h1>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Sales List</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Total Amount</th>
+                    <th>Date</th>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sale in Model.Sales)
+                {
+                    <tr>
+                        <td>@sale.Id</td>
+                        <td>@sale.CustomerName</td>
+                        <td>@sale.TotalAmount.ToString("C")</td>
+                        <td>@sale.Date.ToShortDateString()</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                @foreach (var item in sale.Items)
+                                {
+                                    <li>@item.ProductName (@item.Quantity x @item.Price.ToString("C"))</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="text-end">
+            <a asp-page="Create" class="btn btn-primary">Create New Sale</a>
+        </p>
+    </div>
+</div> 
