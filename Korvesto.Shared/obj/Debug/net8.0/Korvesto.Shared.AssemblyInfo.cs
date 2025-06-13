@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd00315131ec9131cde1e1d847447b78e31bd6dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25df0216be01cb09544ea06bfd5163f49a241f41")]
 [assembly: System.Reflection.AssemblyProductAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Korvesto.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
