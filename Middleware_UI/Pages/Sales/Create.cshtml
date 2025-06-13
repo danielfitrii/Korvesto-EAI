@@ -1,0 +1,287 @@
+@page
+@model Middleware_UI.Pages.Sales.CreateModel
+@{
+    ViewData["Title"] = "Create Sale";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Create Sale</h1>
+
+    <form method="post" id="createSaleForm">
+        <div class="card mb-4">
+            <div class="card-header">
+                Customer Details
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Sale.CustomerId" class="form-label">Customer ID</label>
+                    <input asp-for="Sale.CustomerId" class="form-control" id="customerIdInput" />
+                    <span asp-validation-for="Sale.CustomerId" class="text-danger"></span>
+                </div>
+
+                <div id="customerInfo" class="alert alert-info" style="display:none;">
+                    <strong>Name:</strong> <span id="customerName"></span><br />
+                    <strong>Email:</strong> <span id="customerEmail"></span><br />
+                    <strong>Phone:</strong> <span id="customerPhone"></span><br />
+                    <strong>Loyalty Points:</strong> <span id="customerPoints"></span><br />
+                    <strong>Join Date:</strong> <span id="customerJoinDate"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                Sale Items
+            </div>
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label for="productSelect" class="form-label">Product</label>
+                        <select asp-for="NewItem.ProductId" class="form-select" id="productSelect">
+                            <option value="">Select a product</option>
+                            @foreach (var p in Model.AvailableProducts)
+                            {
+                                <option value="@p.Value" data-price="@(p.Text.Contains('(') && p.Text.Contains(')') ? p.Text.Substring(p.Text.IndexOf('(') + 1, p.Text.LastIndexOf(')') - p.Text.IndexOf('(') - 1).Replace("RM","").Trim() : "0.00")">@p.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="NewItem.ProductId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <label asp-for="NewItem.Quantity" class="form-label">Quantity</label>
+                        <input asp-for="NewItem.Quantity" class="form-control" type="number" min="1" value="1" id="itemQuantity" />
+                        <span asp-validation-for="NewItem.Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="itemUnitPrice" class="form-label">Unit Price</label>
+                        <input type="number" step="0.01" min="0" class="form-control" id="itemUnitPrice" readonly />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="itemTotal" class="form-label">Total</label>
+                        <input type="number" step="0.01" min="0" class="form-control" id="itemTotal" readonly />
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" name="handler" value="AddItem" class="btn btn-secondary w-100">Add</button>
+                    </div>
+                </div>
+
+                <div id="productDetailsInfo" class="alert alert-secondary mt-3" style="display:none;">
+                    <strong>Name:</strong> <span id="productDetailsName"></span><br />
+                    <strong>Description:</strong> <span id="productDetailsDescription"></span><br />
+                    <strong>Current Stock:</strong> <span id="productDetailsStock"></span>
+                </div>
+
+                @* This section will now be dynamically populated by JavaScript *@
+                <div id="addedItemsTableContainer" class="mt-4" style="display:none;">
+                    <h5>Added Items</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="saleItemsBody">
+                            @* Items will be added here by JavaScript *@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                Total Amount
+            </div>
+            <div class="card-body">
+                <p class="fs-4"><strong>Total: <span id="overallTotalAmount">@Model.Sale.TotalAmount.ToString("C")</span></strong></p>
+            </div>
+        </div>
+
+        @* Hidden input to store sale items JSON for submission *@
+        <input type="hidden" asp-for="Sale.Items" id="saleItemsJson" />
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create Sale</button>
+            <a asp-page="/Index" class="btn btn-secondary">Back to Home</a>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @if (!string.IsNullOrEmpty(Model.ResultMessage))
+        {
+            <div class="alert alert-info mt-3">
+                @Model.ResultMessage
+            </div>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        let addedSaleItems = @Html.Raw(Json.Serialize(Model.Sale.Items));
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Customer ID lookup (existing logic, no changes)
+            document.getElementById('customerIdInput').addEventListener('blur', async function() {
+                const custId = this.value.trim();
+                const customerInfoDiv = document.getElementById('customerInfo');
+                if (!custId) {
+                    customerInfoDiv.style.display = 'none';
+                    return;
+                }
+                const response = await fetch(`/Sales/GetCustomerInfo?customerId=${encodeURIComponent(custId)}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.customerId) {
+                        customerInfoDiv.style.display = '';
+                        document.getElementById('customerName').textContent = data.name;
+                        document.getElementById('customerEmail').textContent = data.email;
+                        document.getElementById('customerPhone').textContent = data.phone;
+                        document.getElementById('customerPoints').textContent = data.loyaltyPoints;
+                        document.getElementById('customerJoinDate').textContent = new Date(data.joinDate).toLocaleDateString();
+                    } else {
+                        customerInfoDiv.style.display = 'none';
+                    }
+                } else {
+                    customerInfoDiv.style.display = 'none';
+                }
+            });
+
+            // Product selection lookup and total calculation
+            const productSelect = document.getElementById('productSelect');
+            const productDetailsInfoDiv = document.getElementById('productDetailsInfo');
+            const itemUnitPriceInput = document.getElementById('itemUnitPrice');
+            const itemQuantityInput = document.getElementById('itemQuantity');
+            const itemTotalInput = document.getElementById('itemTotal');
+            const addAnotherItemButton = document.querySelector('button[name="handler"][value="AddItem"]');
+            const saleItemsBody = document.getElementById('saleItemsBody');
+            const overallTotalAmountSpan = document.getElementById('overallTotalAmount');
+            const saleItemsJsonInput = document.getElementById('saleItemsJson');
+            const addedItemsTableContainer = document.getElementById('addedItemsTableContainer');
+
+
+            // Initial render of existing items (if any, e.g., on validation error postback)
+            renderSaleItems();
+
+            productSelect.addEventListener('change', function() {
+                const selectedOption = productSelect.options[productSelect.selectedIndex];
+                const selectedProductId = selectedOption.value;
+
+                if (!selectedProductId) {
+                    productDetailsInfoDiv.style.display = 'none';
+                    itemUnitPriceInput.value = '0.00';
+                    itemTotalInput.value = '0.00';
+                    return;
+                }
+
+                // Fetch full product details including stock
+                fetch(`/Sales/GetProductInfo?productId=${encodeURIComponent(selectedProductId)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.id) {
+                            productDetailsInfoDiv.style.display = '';
+                            document.getElementById('productDetailsName').textContent = data.name;
+                            document.getElementById('productDetailsDescription').textContent = data.description;
+                            document.getElementById('productDetailsStock').textContent = data.stockQuantity;
+                            itemUnitPriceInput.value = parseFloat(data.price).toFixed(2);
+                            updateItemTotal();
+                        } else {
+                            productDetailsInfoDiv.style.display = 'none';
+                            itemUnitPriceInput.value = '0.00';
+                            itemTotalInput.value = '0.00';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product details:', error);
+                        productDetailsInfoDiv.style.display = 'none';
+                        itemUnitPriceInput.value = '0.00';
+                        itemTotalInput.value = '0.00';
+                    });
+            });
+
+            itemQuantityInput.addEventListener('input', updateItemTotal);
+
+            function updateItemTotal() {
+                const quantity = parseFloat(itemQuantityInput.value) || 0;
+                const unitPrice = parseFloat(itemUnitPriceInput.value) || 0;
+                const total = quantity * unitPrice;
+                itemTotalInput.value = total.toFixed(2);
+            }
+
+            addAnotherItemButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent full form submission
+
+                const productId = productSelect.value;
+                const productName = productSelect.options[productSelect.selectedIndex].text.split('(')[0].trim();
+                const quantity = parseFloat(itemQuantityInput.value);
+                const unitPrice = parseFloat(itemUnitPriceInput.value);
+                const total = parseFloat(itemTotalInput.value);
+
+                if (!productId || quantity <= 0 || isNaN(quantity) || isNaN(unitPrice) || isNaN(total)) {
+                    alert('Please select a valid product and quantity.');
+                    return;
+                }
+
+                const newItem = {
+                    productId: productId,
+                    productName: productName,
+                    quantity: quantity,
+                    totalPrice: total
+                };
+
+                addedSaleItems.push(newItem);
+                renderSaleItems();
+                resetAddItemForm();
+            });
+
+            function renderSaleItems() {
+                saleItemsBody.innerHTML = '';
+                let overallTotal = 0;
+
+                if (addedSaleItems.length > 0) {
+                    addedItemsTableContainer.style.display = '';
+                    addedSaleItems.forEach((item, index) => {
+                        const row = saleItemsBody.insertRow();
+                        row.innerHTML = `
+                            <td>${item.productName}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.totalPrice.toFixed(2)}</td>
+                            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button></td>
+                        `;
+                        overallTotal += item.totalPrice;
+                    });
+                } else {
+                    addedItemsTableContainer.style.display = 'none';
+                }
+                overallTotalAmountSpan.textContent = overallTotal.toFixed(2);
+                updateSaleItemsJson();
+            }
+
+            window.removeItem = function(index) {
+                addedSaleItems.splice(index, 1);
+                renderSaleItems();
+            };
+
+            function resetAddItemForm() {
+                productSelect.value = '';
+                itemQuantityInput.value = '1';
+                itemUnitPriceInput.value = '0.00';
+                itemTotalInput.value = '0.00';
+                productDetailsInfoDiv.style.display = 'none';
+            }
+
+            function updateSaleItemsJson() {
+                saleItemsJsonInput.value = JSON.stringify(addedSaleItems);
+            }
+
+            // Intercept form submission to ensure JSON is updated
+            document.getElementById('createSaleForm').addEventListener('submit', function() {
+                updateSaleItemsJson();
+            });
+        });
+    </script>
+} 

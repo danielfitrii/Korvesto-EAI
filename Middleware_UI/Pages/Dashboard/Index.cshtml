@@ -1,0 +1,120 @@
+@page
+@model Middleware_UI.Pages.Dashboard.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <h2 class="mb-4">Dashboard</h2>
+
+    <div class="row">
+        <!-- Sales Summary -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Sales Summary</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="mb-0">@Model.SalesSummary.TotalSales.ToString("C")</h2>
+                        <span class="badge bg-success">@Model.SalesSummary.SalesCount sales</span>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" style="width: @Model.SalesSummary.DailyTargetPercentage%">
+                            @Model.SalesSummary.DailyTargetPercentage%
+                        </div>
+                    </div>
+                    <p class="text-muted mb-0">Daily Target: @Model.SalesSummary.DailyTarget.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Status -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Stock Status</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="mb-0">@Model.StockSummary.TotalProducts</h2>
+                        <span class="badge bg-info">Products</span>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Low Stock
+                            <span class="badge bg-warning rounded-pill">@Model.StockSummary.LowStockCount</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Out of Stock
+                            <span class="badge bg-danger rounded-pill">@Model.StockSummary.OutOfStockCount</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loyalty Stats -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Loyalty Stats</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="mb-0">@Model.LoyaltySummary.TotalPoints</h2>
+                        <span class="badge bg-primary">Points</span>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Active Members
+                            <span class="badge bg-success rounded-pill">@Model.LoyaltySummary.ActiveMembers</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Points Issued Today
+                            <span class="badge bg-info rounded-pill">@Model.LoyaltySummary.PointsIssuedToday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Sales -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Sales</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sale ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sale in Model.RecentSales)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-page="/Sales/SaleDetails" asp-route-id="@sale.SaleId">@sale.SaleId</a>
+                                        </td>
+                                        <td>@sale.CustomerName</td>
+                                        <td>@sale.SaleDate.ToString("g")</td>
+                                        <td>@sale.TotalAmount.ToString("C")</td>
+                                        <td>
+                                            <span class="badge bg-@(sale.Status == "Completed" ? "success" : "warning")">
+                                                @sale.Status
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
