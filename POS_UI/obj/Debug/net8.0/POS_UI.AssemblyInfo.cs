@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POS_UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3e197f69e27ed09f753e27f1b64edfba32fed1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5618a80fbce479d0347dabcfdcb00bd41a63c7a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("POS_UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POS_UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
