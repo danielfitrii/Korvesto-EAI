@@ -2,7 +2,7 @@
   {
     "ContainingType": "Middleware_API.Controllers.MiddlewareController",
     "Method": "GetActivityLogs",
-    "RelativePath": "api/Middleware/activity-logs",
+    "RelativePath": "api/Middleware/logs",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -11,43 +11,18 @@
   },
   {
     "ContainingType": "Middleware_API.Controllers.MiddlewareController",
-    "Method": "ProcessSalesAndUpdateStock",
-    "RelativePath": "api/Middleware/process-sales",
-    "HttpMethod": "GET",
+    "Method": "ProcessSale",
+    "RelativePath": "api/Middleware/process-sale",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Middleware_API.Controllers.MiddlewareController",
-    "Method": "GetSalesFromPOS",
-    "RelativePath": "api/Middleware/sales",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Middleware_API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Middleware_API.WeatherForecast, Middleware_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "sale",
+        "Type": "Korvesto.Shared.Models.Sale",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

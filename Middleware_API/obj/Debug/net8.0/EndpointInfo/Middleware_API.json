@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Middleware/activity-logs": {
+    "/api/Middleware/logs": {
       "get": {
         "tags": [
           "Middleware"
@@ -17,65 +17,33 @@
         }
       }
     },
-    "/api/Middleware/sales": {
-      "get": {
+    "/api/Middleware/process-sale": {
+      "post": {
         "tags": [
           "Middleware"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Middleware/process-sales": {
-      "get": {
-        "tags": [
-          "Middleware"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "GetWeatherForecast",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale"
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -83,25 +51,53 @@
   },
   "components": {
     "schemas": {
-      "WeatherForecast": {
+      "Sale": {
         "type": "object",
         "properties": {
-          "date": {
+          "id": {
             "type": "string",
-            "format": "date"
+            "nullable": true
           },
-          "temperatureC": {
+          "customerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "saleDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SaleItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SaleItem": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
             "type": "integer",
             "format": "int32"
           },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
           },
-          "summary": {
-            "type": "string",
-            "nullable": true
+          "totalPrice": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
