@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Korvesto.Shared.Models;
 
 namespace Warehouse_API.Controllers
 {
@@ -7,36 +7,74 @@ namespace Warehouse_API.Controllers
     [Route("api/[controller]")]
     public class StockController : ControllerBase
     {
-        private static Dictionary<string, int> _stockLevels = new();
+        private static List<Stock> _stock = new()
+        {
+            new Stock 
+            { 
+                ProductId = "P001", 
+                Quantity = 10, 
+                Location = "Main Warehouse",
+                LastUpdated = DateTime.UtcNow
+            },
+            new Stock 
+            { 
+                ProductId = "P002", 
+                Quantity = 15, 
+                Location = "Main Warehouse",
+                LastUpdated = DateTime.UtcNow
+            },
+            new Stock 
+            { 
+                ProductId = "P003", 
+                Quantity = 20, 
+                Location = "Main Warehouse",
+                LastUpdated = DateTime.UtcNow
+            }
+        };
 
         [HttpGet]
-        public IActionResult GetAllStock()
+        public IActionResult GetAll()
         {
-            return Ok(_stockLevels);
+            return Ok(_stock);
         }
 
-        [HttpPost("{productCode}/deduct/{quantity}")]
-        public IActionResult DeductStock(string productCode, int quantity)
+        [HttpGet("{productId}")]
+        public IActionResult Get(string productId)
         {
-            if (!_stockLevels.ContainsKey(productCode))
-                return NotFound("Product not found.");
+            var stock = _stock.FirstOrDefault(s => s.ProductId == productId);
+            if (stock == null)
+                return NotFound($"No stock found for product {productId}");
 
-            _stockLevels[productCode] -= quantity;
-            return Ok(new { ProductCode = productCode, RemainingStock = _stockLevels[productCode] });
+            return Ok(stock);
         }
 
-        [HttpPost("{productCode}/add/{quantity}")]
-        public IActionResult AddStock(string productCode, int quantity)
+        [HttpPost("adjust")]
+        public IActionResult AdjustStock([FromBody] StockAdjustment adjustment)
         {
-            if (!_stockLevels.ContainsKey(productCode))
+            if (adjustment == null)
+                return BadRequest("Adjustment data is required");
+
+            var stock = _stock.FirstOrDefault(s => s.ProductId == adjustment.ProductId);
+            
+            if (stock == null)
             {
-                _stockLevels[productCode] = quantity;
+                // Create new stock entry if it doesn't exist
+                stock = new Stock
+                {
+                    ProductId = adjustment.ProductId,
+                    Quantity = 0,
+                    Location = adjustment.Location,
+                    LastUpdated = DateTime.UtcNow
+                };
+                _stock.Add(stock);
             }
-            else
-            {
-                _stockLevels[productCode] += quantity;
-            }
-            return Ok(new { ProductCode = productCode, RemainingStock = _stockLevels[productCode] });
+
+            // Update stock
+            stock.Quantity += adjustment.Quantity;
+            stock.LastUpdated = DateTime.UtcNow;
+            stock.Location = adjustment.Location;
+
+            return Ok(stock);
         }
     }
 }
