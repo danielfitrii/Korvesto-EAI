@@ -95,5 +95,39 @@ namespace CRM_UI.Services
                 return null;
             }
         }
+
+        public async Task<Customer?> AddLoyaltyPointsAsync(string customerId, int points)
+        {
+            try
+            {
+                _logger.LogInformation($"Attempting to add {points} loyalty points to customer {customerId}");
+                var transaction = new
+                {
+                    CustomerId = customerId,
+                    Points = points,
+                    Description = "Manual points adjustment",
+                    TransactionDate = DateTime.UtcNow
+                };
+                
+                var response = await _httpClient.PostAsJsonAsync($"api/Loyalty/{customerId}/points", transaction);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Failed to add loyalty points. Status code: {response.StatusCode}");
+                    return null;
+                }
+
+                var content = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation($"Received response: {content}");
+
+                var updatedCustomer = await response.Content.ReadFromJsonAsync<Customer>();
+                return updatedCustomer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding loyalty points");
+                return null;
+            }
+        }
     }
 } 

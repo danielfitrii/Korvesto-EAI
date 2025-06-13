@@ -1,0 +1,41 @@
+@page "{id}"
+@model CRM_UI.Pages.Customers.AddLoyaltyPointsModel
+@{
+    ViewData["Title"] = "Add Loyalty Points";
+}
+
+<div class="container mt-4">
+    <h2>Add Loyalty Points</h2>
+    <h4>Customer: @Model.Customer.Name</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post">
+                <input type="hidden" asp-for="Customer.CustomerId" />
+                <input type="hidden" asp-for="Customer.Name" />
+                <input type="hidden" asp-for="Customer.Email" />
+                <input type="hidden" asp-for="Customer.Phone" />
+                <input type="hidden" asp-for="Customer.LoyaltyPoints" />
+                <input type="hidden" asp-for="Customer.JoinDate" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Points" class="control-label">Points to Add</label>
+                    <input asp-for="Points" class="form-control" type="number" min="1" />
+                    <span asp-validation-for="Points" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary">Add Points</button>
+                    <a asp-page="./Details" asp-route-id="@Model.Customer.CustomerId" class="btn btn-secondary">Back to Details</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 
