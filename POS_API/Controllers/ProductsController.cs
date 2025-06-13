@@ -23,25 +23,81 @@ namespace POS_API.Controllers
             { 
                 Id = "P001", 
                 Name = "Laptop", 
-                Price = 49.99m, 
+                Price = 999.99m, 
                 Description = "High-performance laptop",
-                StockQuantity = 10
+                StockQuantity = 50
             },
             new Product 
             { 
                 Id = "P002", 
                 Name = "Smartphone", 
-                Price = 49.99m, 
+                Price = 499.99m, 
                 Description = "Latest model smartphone",
-                StockQuantity = 15
+                StockQuantity = 75
             },
             new Product 
             { 
                 Id = "P003", 
-                Name = "Headphones", 
-                Price = 29.99m, 
-                Description = "Wireless noise-cancelling headphones",
-                StockQuantity = 20
+                Name = "Wireless Headphones", 
+                Price = 149.99m, 
+                Description = "Premium wireless noise-cancelling headphones",
+                StockQuantity = 120
+            },
+            new Product 
+            { 
+                Id = "P004", 
+                Name = "Tablet", 
+                Price = 299.99m, 
+                Description = "Compact and powerful tablet",
+                StockQuantity = 40
+            },
+            new Product 
+            { 
+                Id = "P005", 
+                Name = "Smartwatch", 
+                Price = 199.99m, 
+                Description = "Feature-rich smartwatch with health tracking",
+                StockQuantity = 60
+            },
+            new Product 
+            { 
+                Id = "P006", 
+                Name = "Gaming Console", 
+                Price = 399.99m, 
+                Description = "Next-gen gaming console",
+                StockQuantity = 30
+            },
+            new Product 
+            { 
+                Id = "P007", 
+                Name = "Portable Speaker", 
+                Price = 79.99m, 
+                Description = "Compact and powerful portable speaker",
+                StockQuantity = 150
+            },
+            new Product 
+            { 
+                Id = "P008", 
+                Name = "External Hard Drive", 
+                Price = 129.99m, 
+                Description = "High-capacity external hard drive",
+                StockQuantity = 80
+            },
+            new Product 
+            { 
+                Id = "P009", 
+                Name = "E-Reader", 
+                Price = 109.99m, 
+                Description = "Lightweight e-reader for avid readers",
+                StockQuantity = 70
+            },
+            new Product 
+            { 
+                Id = "P010", 
+                Name = "Fitness Tracker", 
+                Price =59.99m, 
+                Description = "Advanced fitness tracker with heart rate monitor",
+                StockQuantity = 200
             }
         };
 

@@ -69,6 +69,18 @@
           }
         }
       }
+    },
+    "/api/Stock/initialize": {
+      "post": {
+        "tags": [
+          "Stock"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

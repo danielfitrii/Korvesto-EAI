@@ -18,9 +18,14 @@ namespace Middleware_API.Controllers
         {
             new Product { Id = "P001", Name = "Laptop", Price = 999.99m },
             new Product { Id = "P002", Name = "Smartphone", Price = 499.99m },
-            new Product { Id = "P003", Name = "Headphones", Price = 99.99m },
+            new Product { Id = "P003", Name = "Wireless Headphones", Price = 149.99m },
             new Product { Id = "P004", Name = "Tablet", Price = 299.99m },
-            new Product { Id = "P005", Name = "Smartwatch", Price = 199.99m }
+            new Product { Id = "P005", Name = "Smartwatch", Price = 199.99m },
+            new Product { Id = "P006", Name = "Gaming Console", Price = 399.99m },
+            new Product { Id = "P007", Name = "Portable Speaker", Price = 79.99m },
+            new Product { Id = "P008", Name = "External Hard Drive", Price = 129.99m },
+            new Product { Id = "P009", Name = "E-Reader", Price = 109.99m },
+            new Product { Id = "P010", Name = "Fitness Tracker", Price =59.99m }
         };
 
         public MiddlewareController(
@@ -59,10 +64,14 @@ namespace Middleware_API.Controllers
                 var warehouseClient = _httpClientFactory.CreateClient("WarehouseApi");
                 foreach (var item in sale.Items)
                 {
+                    _logger.LogInformation($"Middleware_API: Checking stock for ProductId: {item.ProductId}");
                     var stockResponse = await warehouseClient.GetAsync($"api/Stock/{item.ProductId}");
+                    
                     if (!stockResponse.IsSuccessStatusCode)
                     {
-                        return BadRequest($"Product {item.ProductId} not found in stock");
+                        var errorContent = await stockResponse.Content.ReadAsStringAsync();
+                        _logger.LogError($"Middleware_API: Failed to get stock for product {item.ProductId}. Status: {stockResponse.StatusCode}, Content: {errorContent}");
+                        return BadRequest($"Product {item.ProductId} not found in stock or Warehouse API error: {errorContent}");
                     }
 
                     // Update stock
@@ -70,9 +79,20 @@ namespace Middleware_API.Controllers
                     {
                         ProductId = item.ProductId,
                         Quantity = -item.Quantity, // Negative for reduction
+                        Location = "Main Warehouse", // Add a default location
                         Reason = "Sale"
                     };
-                    await warehouseClient.PostAsJsonAsync("api/Stock/adjust", stockAdjustment);
+
+                    _logger.LogInformation($"Middleware_API: Attempting to adjust stock for ProductId: {stockAdjustment.ProductId}, Quantity: {stockAdjustment.Quantity}");
+                    var adjustResponse = await warehouseClient.PostAsJsonAsync("api/Stock/adjust", stockAdjustment);
+                    
+                    if (!adjustResponse.IsSuccessStatusCode)
+                    {
+                        var errorContent = await adjustResponse.Content.ReadAsStringAsync();
+                        _logger.LogError($"Middleware_API: Failed to adjust stock for product {item.ProductId}. Status: {adjustResponse.StatusCode}, Content: {errorContent}");
+                        return BadRequest($"Failed to update stock for product {item.ProductId}: {errorContent}");
+                    }
+                    _logger.LogInformation($"Middleware_API: Stock adjustment successful for ProductId: {item.ProductId}");
                 }
 
                 // 3. Record the sale

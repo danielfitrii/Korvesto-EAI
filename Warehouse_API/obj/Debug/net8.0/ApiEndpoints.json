@@ -40,5 +40,15 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API.Controllers.StockController",
+    "Method": "InitializeData",
+    "RelativePath": "api/Stock/initialize",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]
