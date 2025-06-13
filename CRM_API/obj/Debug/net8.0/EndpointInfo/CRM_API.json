@@ -68,10 +68,10 @@
         }
       }
     },
-    "/api/Customers/{customerId}/add-points/{points}": {
+    "/api/Loyalty/{customerId}/points": {
       "post": {
         "tags": [
-          "Customers"
+          "Loyalty"
         ],
         "parameters": [
           {
@@ -81,59 +81,30 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "points",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyTransaction"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyTransaction"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyTransaction"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "GetWeatherForecast",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -156,32 +127,39 @@
             "type": "string",
             "nullable": true
           },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
           "loyaltyPoints": {
             "type": "integer",
             "format": "int32"
+          },
+          "joinDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
       },
-      "WeatherForecast": {
+      "LoyaltyTransaction": {
         "type": "object",
         "properties": {
-          "date": {
+          "customerId": {
             "type": "string",
-            "format": "date"
+            "nullable": true
           },
-          "temperatureC": {
+          "points": {
             "type": "integer",
             "format": "int32"
           },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "summary": {
+          "description": {
             "type": "string",
             "nullable": true
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

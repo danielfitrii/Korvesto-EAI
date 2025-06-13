@@ -11,7 +11,7 @@
   },
   {
     "ContainingType": "CRM_API.Controllers.CustomersController",
-    "Method": "CreateCustomer",
+    "Method": "Create",
     "RelativePath": "api/Customers",
     "HttpMethod": "POST",
     "IsController": true,
@@ -20,27 +20,6 @@
       {
         "Name": "customer",
         "Type": "Korvesto.Shared.Models.Customer",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CRM_API.Controllers.CustomersController",
-    "Method": "AddPoints",
-    "RelativePath": "api/Customers/{customerId}/add-points/{points}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "customerId",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "points",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -63,24 +42,24 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CRM_API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
+    "ContainingType": "CRM_API.Controllers.LoyaltyController",
+    "Method": "UpdateLoyaltyPoints",
+    "RelativePath": "api/Loyalty/{customerId}/points",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[CRM_API.WeatherForecast, CRM_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "customerId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "transaction",
+        "Type": "Korvesto.Shared.Models.LoyaltyTransaction",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

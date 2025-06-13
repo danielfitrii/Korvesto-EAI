@@ -16,12 +16,4 @@
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
     }
-
-    public class Customer
-    {
-        public string CustomerId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public int LoyaltyPoints { get; set; }
-    }
 }
