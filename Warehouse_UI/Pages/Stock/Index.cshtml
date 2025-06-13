@@ -1,0 +1,47 @@
+@page
+@model Warehouse_UI.Pages.Stock.IndexModel
+@{
+    ViewData["Title"] = "Stock Levels";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Stock Levels</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Quantity</th>
+                                    <th>Location</th>
+                                    <th>Last Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var stock in Model.StockList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-page="/Products/Details" asp-route-id="@stock.ProductId">@stock.ProductId</a>
+                                        </td>
+                                        <td>@stock.Quantity</td>
+                                        <td>@stock.Location</td>
+                                        <td>@stock.LastUpdated.ToString("g")</td>
+                                        <td>
+                                            <a href="/Stock/Adjust?productId=@stock.ProductId" class="btn btn-sm btn-outline-primary">Adjust</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

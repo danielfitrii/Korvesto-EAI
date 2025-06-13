@@ -1,0 +1,52 @@
+@page
+@model Warehouse_UI.Pages.Stock.AdjustModel
+@{
+    ViewData["Title"] = "Adjust Stock";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">Adjust Stock</h2>
+                </div>
+                <div class="card-body">
+                    @if (Model.CurrentStock != null)
+                    {
+                        <div class="alert alert-info">
+                            Current stock level for @Model.CurrentStock.ProductId: @Model.CurrentStock.Quantity
+                        </div>
+                    }
+
+                    <form method="post">
+                        <input type="hidden" asp-for="Adjustment.ProductId" />
+                        <input type="hidden" asp-for="Adjustment.Location" />
+
+                        <div class="mb-3">
+                            <label asp-for="Adjustment.Quantity" class="form-label">Adjustment Quantity</label>
+                            <input asp-for="Adjustment.Quantity" class="form-control" type="number" />
+                            <span class="text-muted">Enter a positive number to add stock, negative to remove stock</span>
+                            <span asp-validation-for="Adjustment.Quantity" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Adjustment.Reason" class="form-label">Reason for Adjustment</label>
+                            <textarea asp-for="Adjustment.Reason" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Adjustment.Reason" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                            <button type="submit" class="btn btn-primary">Save Adjustment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} 
