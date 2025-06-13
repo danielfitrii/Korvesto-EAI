@@ -11,8 +11,14 @@
         <div class="card-body">
             <form method="post" id="saleForm">
                 <div class="mb-3">
-                    <label asp-for="Sale.CustomerId" class="form-label">Customer ID</label>
-                    <input asp-for="Sale.CustomerId" class="form-control" required />
+                    <label asp-for="Sale.CustomerId" class="form-label">Customer</label>
+                    <select asp-for="Sale.CustomerId" class="form-select" required>
+                        <option value="">Select a customer</option>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <option value="@customer.CustomerId">@customer.Name (@customer.CustomerId)</option>
+                        }
+                    </select>
                     <span asp-validation-for="Sale.CustomerId" class="text-danger"></span>
                 </div>
 

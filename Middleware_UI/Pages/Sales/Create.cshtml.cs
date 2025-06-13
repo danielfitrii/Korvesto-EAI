@@ -23,17 +23,19 @@ namespace Middleware_UI.Pages.Sales
         };
 
         public List<Product> Products { get; set; } = new List<Product>();
+        public List<Customer> Customers { get; set; } = new List<Customer>();
 
         public async Task<IActionResult> OnGetAsync()
         {
             try
             {
                 Products = await _middlewareService.GetProductsAsync();
+                Customers = await _middlewareService.GetCustomersAsync();
                 return Page();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error loading products");
+                _logger.LogError(ex, "Error loading products or customers");
                 return Page();
             }
         }
@@ -43,6 +45,7 @@ namespace Middleware_UI.Pages.Sales
             if (!ModelState.IsValid)
             {
                 Products = await _middlewareService.GetProductsAsync();
+                Customers = await _middlewareService.GetCustomersAsync();
                 return Page();
             }
 

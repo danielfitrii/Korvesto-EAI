@@ -22,6 +22,16 @@
   },
   {
     "ContainingType": "Middleware_API.Controllers.MiddlewareController",
+    "Method": "GetCustomers",
+    "RelativePath": "api/Middleware/customers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Middleware_API.Controllers.MiddlewareController",
     "Method": "GetLogs",
     "RelativePath": "api/Middleware/logs",
     "HttpMethod": "GET",

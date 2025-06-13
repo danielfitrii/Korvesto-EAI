@@ -17,6 +17,18 @@
         }
       }
     },
+    "/api/Middleware/customers": {
+      "get": {
+        "tags": [
+          "Middleware"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Middleware/process-sale": {
       "post": {
         "tags": [
@@ -204,13 +216,13 @@
             "type": "string",
             "nullable": true
           },
-          "customerId": {
-            "type": "string",
-            "nullable": true
-          },
           "saleDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "customerId": {
+            "type": "string",
+            "nullable": true
           },
           "totalAmount": {
             "type": "number",
@@ -229,6 +241,10 @@
       "SaleItem": {
         "type": "object",
         "properties": {
+          "saleId": {
+            "type": "string",
+            "nullable": true
+          },
           "productId": {
             "type": "string",
             "nullable": true

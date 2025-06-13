@@ -65,6 +65,31 @@ namespace Middleware_UI.Services
             }
         }
 
+        public async Task<List<Customer>> GetCustomersAsync()
+        {
+            try
+            {
+                var client = _httpClientFactory.CreateClient("MiddlewareApi");
+                _logger.LogInformation("Fetching customers from CRM API");
+                
+                var response = await client.GetAsync("api/Middleware/customers"); // This will call Middleware API which in turn calls CRM API
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Failed to fetch customers. Status code: {response.StatusCode}");
+                    return new List<Customer>();
+                }
+
+                var customers = await response.Content.ReadFromJsonAsync<List<Customer>>();
+                _logger.LogInformation($"Retrieved {customers?.Count ?? 0} customers");
+                return customers ?? new List<Customer>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching customers");
+                return new List<Customer>();
+            }
+        }
+
         public async Task<bool> ProcessSaleAsync(Sale sale)
         {
             try

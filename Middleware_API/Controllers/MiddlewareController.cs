@@ -45,6 +45,33 @@ namespace Middleware_API.Controllers
             return Ok(_products);
         }
 
+        [HttpGet("customers")]
+        public async Task<IActionResult> GetCustomers()
+        {
+            try
+            {
+                var crmClient = _httpClientFactory.CreateClient("CRMApi");
+                _logger.LogInformation("Middleware_API: Fetching customers from CRM API");
+
+                var response = await crmClient.GetAsync("api/Customers");
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    _logger.LogError($"Middleware_API: Failed to fetch customers from CRM API. Status: {response.StatusCode}, Content: {errorContent}");
+                    return StatusCode((int)response.StatusCode, "Failed to fetch customers from CRM API");
+                }
+
+                var customers = await response.Content.ReadFromJsonAsync<List<Customer>>();
+                _logger.LogInformation($"Middleware_API: Retrieved {customers?.Count ?? 0} customers from CRM API");
+                return Ok(customers ?? new List<Customer>());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Middleware_API: Error fetching customers from CRM API");
+                return StatusCode(500, "An error occurred while fetching customers");
+            }
+        }
+
         [HttpPost("process-sale")]
         public async Task<IActionResult> ProcessSale([FromBody] Sale sale)
         {
