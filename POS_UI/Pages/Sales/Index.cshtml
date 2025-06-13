@@ -29,6 +29,7 @@
                                     <th>Sale Date</th>
                                     <th>Total Amount</th>
                                     <th>Items</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,9 @@
                                                     <li>@item.Quantity x @item.ProductId (@item.TotalPrice.ToString("C"))</li>
                                                 }
                                             </ul>
+                                        </td>
+                                        <td>
+                                            <a asp-page="./Details" asp-route-id="@sale.Id" class="btn btn-info btn-sm">View Details</a>
                                         </td>
                                     </tr>
                                 }

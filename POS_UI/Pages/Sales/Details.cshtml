@@ -1,0 +1,59 @@
+@page "{id?}"
+@model POS_UI.Pages.Sales.DetailsModel
+@{
+    ViewData["Title"] = "Sale Details";
+}
+
+<div class="container mt-4">
+    <h1>Sale Details</h1>
+
+    @if (Model.Sale == null)
+    {
+        <div class="alert alert-warning" role="alert">
+            Sale not found.
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                Sale: @Model.Sale.Id
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Sale ID:</dt>
+                    <dd class="col-sm-9">@Model.Sale.Id</dd>
+
+                    <dt class="col-sm-3">Customer ID:</dt>
+                    <dd class="col-sm-9">@Model.Sale.CustomerId</dd>
+
+                    <dt class="col-sm-3">Sale Date:</dt>
+                    <dd class="col-sm-9">@Model.Sale.SaleDate.ToShortDateString() @Model.Sale.SaleDate.ToShortTimeString()</dd>
+
+                    <dt class="col-sm-3">Total Amount:</dt>
+                    <dd class="col-sm-9">@Model.Sale.TotalAmount.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Items:</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.Sale.Items != null && Model.Sale.Items.Any())
+                        {
+                            <ul>
+                                @foreach (var item in Model.Sale.Items)
+                                {
+                                    <li>@item.Quantity x @item.ProductId (Unit Price: @item.UnitPrice.ToString("C"), Total: @item.TotalPrice.ToString("C"))</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No items in this sale.</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer">
+                <a asp-page="./Index" class="btn btn-secondary">Back to Sales List</a>
+            </div>
+        </div>
+    }
+</div> 
