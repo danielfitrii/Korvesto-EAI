@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Korvesto.Shared.Models;
+using POS_API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace POS_API.Controllers
 {
@@ -7,18 +9,24 @@ namespace POS_API.Controllers
     [Route("api/[controller]")]
     public class SalesController : ControllerBase
     {
-        private static List<Sale> _sales = new();
+        private readonly POSContext _context;
+
+        public SalesController(POSContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_sales);
+            var sales = await _context.Sales.Include(s => s.Items).ToListAsync();
+            return Ok(sales);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
-            var sale = _sales.FirstOrDefault(s => s.Id == id);
+            var sale = await _context.Sales.Include(s => s.Items).FirstOrDefaultAsync(s => s.Id == id);
             if (sale == null)
                 return NotFound();
 
@@ -26,7 +34,7 @@ namespace POS_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Sale sale)
+        public async Task<IActionResult> Create([FromBody] Sale sale)
         {
             Console.WriteLine($"API Received Sale: {(sale != null ? "Not Null" : "Null")}");
             if (sale != null)
@@ -58,7 +66,7 @@ namespace POS_API.Controllers
             else
             {
                 // Check if ID already exists
-                if (_sales.Any(s => s.Id == sale.Id))
+                if (await _context.Sales.AnyAsync(s => s.Id == sale.Id))
                 {
                     return BadRequest($"Sale with ID {sale.Id} already exists");
                 }
@@ -69,7 +77,9 @@ namespace POS_API.Controllers
             // Calculate total amount
             sale.TotalAmount = sale.Items.Sum(item => item.TotalPrice);
 
-            _sales.Add(sale);
+            _context.Sales.Add(sale);
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(Get), new { id = sale.Id }, sale);
         }
     }
