@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Customer ID</th>
                     <th>Customer Name</th>
                     <th>Total Amount</th>
                     <th>Date</th>
@@ -26,6 +27,7 @@
                 {
                     <tr>
                         <td>@sale.Id</td>
+                        <td>@sale.CustomerId</td>
                         <td>@sale.CustomerName</td>
                         <td>@sale.TotalAmount.ToString("C")</td>
                         <td>@sale.Date.ToShortDateString()</td>

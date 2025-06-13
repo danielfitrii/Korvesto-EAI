@@ -20,6 +20,7 @@ C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middlew
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.csproj.CoreCompileInputs.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.sourcelink.json
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -28,11 +29,10 @@ C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticw
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middlewa.99B9E808.Up2Date
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.dll
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\refint\Middleware_API.dll
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.genruntimeconfig.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\ref\Middleware_API.dll
-C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\Middleware_API.sourcelink.json
+C:\Users\danie\source\repos\Korvesto_EAI\Middleware_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

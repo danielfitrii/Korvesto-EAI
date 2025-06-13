@@ -13,6 +13,7 @@ namespace Middleware_API.Controllers
         private readonly HttpClient _warehouseHttpClient;
         private readonly HttpClient _crmHttpClient;
         private readonly ILogger<MiddlewareController> _logger;
+        private static List<ActivityLog> _activityLogs = new();
 
         public MiddlewareController(IHttpClientFactory httpClientFactory, ILogger<MiddlewareController> logger)
         {
@@ -20,6 +21,12 @@ namespace Middleware_API.Controllers
             _warehouseHttpClient = httpClientFactory.CreateClient("WarehouseApi");
             _crmHttpClient = httpClientFactory.CreateClient("CRMApi");
             _logger = logger;
+        }
+
+        [HttpGet("activity-logs")]
+        public IActionResult GetActivityLogs()
+        {
+            return Ok(_activityLogs);
         }
 
         [HttpGet("sales")]
@@ -33,6 +40,7 @@ namespace Middleware_API.Controllers
                 {
                     var errorContent = await response.Content.ReadAsStringAsync();
                     _logger.LogError($"POS API returned {response.StatusCode}: {errorContent}");
+                    LogActivity("Error", "Failed to fetch sales", errorContent);
                     return StatusCode((int)response.StatusCode, $"POS API error: {errorContent}");
                 }
 
@@ -42,17 +50,13 @@ namespace Middleware_API.Controllers
                     PropertyNameCaseInsensitive = true
                 });
 
+                LogActivity("Info", "Sales fetched", $"Retrieved {sales.Count} sales");
                 return Ok(sales);
-            }
-            catch (HttpRequestException ex)
-            {
-                _logger.LogError(ex, "Error connecting to POS API");
-                return StatusCode(500, $"Error connecting to POS API: {ex.Message}");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unexpected error while fetching sales");
-                return StatusCode(500, $"Unexpected error: {ex.Message}");
+                LogActivity("Error", "Error fetching sales", ex.Message);
+                return StatusCode(500, $"Error: {ex.Message}");
             }
         }
 
@@ -62,12 +66,11 @@ namespace Middleware_API.Controllers
             try
             {
                 var salesResponse = await _posHttpClient.GetAsync("api/sales");
-
                 if (!salesResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await salesResponse.Content.ReadAsStringAsync();
-                    _logger.LogError($"POS API returned {salesResponse.StatusCode}: {errorContent}");
-                    return StatusCode((int)salesResponse.StatusCode, $"POS API error during sales fetch: {errorContent}");
+                    LogActivity("Error", "Failed to fetch sales for processing", errorContent);
+                    return StatusCode((int)salesResponse.StatusCode, $"POS API error: {errorContent}");
                 }
 
                 var salesJson = await salesResponse.Content.ReadAsStringAsync();
@@ -79,6 +82,8 @@ namespace Middleware_API.Controllers
                 var results = new List<string>();
                 foreach (var sale in sales)
                 {
+                    LogActivity("Info", "Processing sale", $"Sale ID: {sale.Id}, Customer: {sale.CustomerId}");
+
                     foreach (var item in sale.Items)
                     {
                         string url = $"api/stock/{item.ProductCode}/deduct/{item.Quantity}";
@@ -87,43 +92,68 @@ namespace Middleware_API.Controllers
                         if (deductResponse.IsSuccessStatusCode)
                         {
                             var result = await deductResponse.Content.ReadAsStringAsync();
+                            LogActivity("Info", "Stock deducted", $"Product: {item.ProductCode}, Quantity: {item.Quantity}, Result: {result}");
                             results.Add($" {item.ProductCode}: {item.Quantity} deducted → {result}");
                         }
                         else
                         {
                             var errorContent = await deductResponse.Content.ReadAsStringAsync();
+                            LogActivity("Error", "Stock deduction failed", $"Product: {item.ProductCode}, Error: {errorContent}");
                             results.Add($" {item.ProductCode}: failed to deduct ({deductResponse.StatusCode}) - {errorContent}");
                         }
                     }
 
-                    // Reward customer: +10 points per sale
-                    string crmUrl = $"api/customers/{sale.CustomerName}/add-points/10";
+                    if (string.IsNullOrEmpty(sale.CustomerId))
+                    {
+                        LogActivity("Warning", "Loyalty points skipped", "No CustomerId provided");
+                        results.Add($" Loyalty: Skipped - No CustomerId provided");
+                        continue;
+                    }
+
+                    string crmUrl = $"api/customers/{sale.CustomerId}/add-points/10";
                     var crmResponse = await _crmHttpClient.PostAsync(crmUrl, null);
 
                     if (crmResponse.IsSuccessStatusCode)
                     {
                         var crmResult = await crmResponse.Content.ReadAsStringAsync();
-                        results.Add($" Loyalty: +10 points → {crmResult}");
+                        LogActivity("Info", "Loyalty points added", $"Customer: {sale.CustomerId}, Points: +10, Result: {crmResult}");
+                        results.Add($" Loyalty: +10 points for customer {sale.CustomerId} → {crmResult}");
                     }
                     else
                     {
                         var crmError = await crmResponse.Content.ReadAsStringAsync();
-                        results.Add($" CRM: Failed to add points ({crmResponse.StatusCode}) - {crmError}");
+                        LogActivity("Error", "Loyalty points failed", $"Customer: {sale.CustomerId}, Error: {crmError}");
+                        results.Add($" CRM: Failed to add points for customer {sale.CustomerId} ({crmResponse.StatusCode}) - {crmError}");
                     }
                 }
 
                 return Ok(new { message = "Processed sales and updated stock", details = results });
             }
-            catch (HttpRequestException ex)
-            {
-                _logger.LogError(ex, "Error connecting to one of the APIs during sales processing");
-                return StatusCode(500, $"Error connecting to API: {ex.Message}");
-            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unexpected error during sales processing");
-                return StatusCode(500, $"Unexpected error during processing: {ex.Message}");
+                LogActivity("Error", "Processing error", ex.Message);
+                return StatusCode(500, $"Error: {ex.Message}");
             }
         }
+
+        private void LogActivity(string level, string action, string details)
+        {
+            var log = new ActivityLog
+            {
+                Timestamp = DateTime.UtcNow,
+                Level = level,
+                Action = action,
+                Details = details
+            };
+            _activityLogs.Add(log);
+        }
+    }
+
+    public class ActivityLog
+    {
+        public DateTime Timestamp { get; set; }
+        public string Level { get; set; }  // Info, Warning, Error
+        public string Action { get; set; } // What happened
+        public string Details { get; set; } // Additional information
     }
 }

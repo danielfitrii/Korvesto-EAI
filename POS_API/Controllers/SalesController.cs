@@ -7,38 +7,57 @@ namespace POS_API.Controllers
     [Route("api/[controller]")]
     public class SalesController : ControllerBase
     {
-        private static List<Sale> _sales = new List<Sale>
-        {
-            new Sale
-            {
-                Id = 1,
-                Date = DateTime.Now,
-                CustomerName = "Alice",
-                TotalAmount = 150.00m,
-                Items = new List<SaleItem>
-                {
-                    new SaleItem { ProductCode = "P001", ProductName = "Mouse", Quantity = 2, Price = 25.00m },
-                    new SaleItem { ProductCode = "P002", ProductName = "Keyboard", Quantity = 1, Price = 100.00m }
-                }
-            }
-        };
+        private static List<Sale> _sales = new();
 
-        // GET: api/sales
         [HttpGet]
-        public IActionResult GetSales()
+        public IActionResult GetAll()
         {
             return Ok(_sales);
         }
 
-        // POST: api/sales
-        [HttpPost]
-        public IActionResult CreateSale([FromBody] Sale newSale)
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
         {
-            // Generate a simple ID for in-memory storage
-            newSale.Id = _sales.Any() ? _sales.Max(s => s.Id) + 1 : 1;
-            _sales.Add(newSale);
+            var sale = _sales.FirstOrDefault(s => s.Id == id);
+            if (sale == null)
+                return NotFound();
 
-            return CreatedAtAction(nameof(GetSales), new { id = newSale.Id }, newSale);
+            return Ok(sale);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] Sale sale)
+        {
+            if (sale == null)
+                return BadRequest("Sale data is required");
+
+            if (string.IsNullOrEmpty(sale.CustomerId))
+                return BadRequest("CustomerId is required");
+
+            if (sale.Items == null || !sale.Items.Any())
+                return BadRequest("Sale must contain at least one item");
+
+            // Check if ID is provided, if not generate one
+            if (string.IsNullOrEmpty(sale.Id))
+            {
+                sale.Id = Guid.NewGuid().ToString();
+            }
+            else
+            {
+                // Check if ID already exists
+                if (_sales.Any(s => s.Id == sale.Id))
+                {
+                    return BadRequest($"Sale with ID {sale.Id} already exists");
+                }
+            }
+
+            sale.SaleDate = DateTime.UtcNow;
+
+            // Calculate total amount
+            sale.TotalAmount = sale.Items.Sum(item => item.TotalPrice);
+
+            _sales.Add(sale);
+            return CreatedAtAction(nameof(Get), new { id = sale.Id }, sale);
         }
     }
 }

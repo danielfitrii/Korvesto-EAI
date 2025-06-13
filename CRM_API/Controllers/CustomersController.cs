@@ -7,11 +7,7 @@ namespace CRM_API.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-        private static List<Customer> _customers = new()
-        {
-            new Customer { CustomerId = "C001", Name = "Alice", Email = "alice@email.com", LoyaltyPoints = 100 },
-            new Customer { CustomerId = "C002", Name = "Bob", Email = "bob@email.com", LoyaltyPoints = 200 }
-        };
+        private static List<Customer> _customers = new();
 
         [HttpGet]
         public IActionResult GetAll() => Ok(_customers);
@@ -31,6 +27,18 @@ namespace CRM_API.Controllers
 
             customer.LoyaltyPoints += points;
             return Ok(customer);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCustomer([FromBody] Customer customer)
+        {
+            if (_customers.Any(c => c.CustomerId == customer.CustomerId))
+            {
+                return BadRequest("Customer with this ID already exists.");
+            }
+
+            _customers.Add(customer);
+            return CreatedAtAction(nameof(Get), new { id = customer.CustomerId }, customer);
         }
     }
 }

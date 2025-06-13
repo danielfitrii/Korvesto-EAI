@@ -11,14 +11,30 @@
   },
   {
     "ContainingType": "CRM_API.Controllers.CustomersController",
-    "Method": "AddPoints",
-    "RelativePath": "api/Customers/{customerName}/add-points/{points}",
+    "Method": "CreateCustomer",
+    "RelativePath": "api/Customers",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "customerName",
+        "Name": "customer",
+        "Type": "Korvesto.Shared.Models.Customer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CRM_API.Controllers.CustomersController",
+    "Method": "AddPoints",
+    "RelativePath": "api/Customers/{customerId}/add-points/{points}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
         "Type": "System.String",
         "IsRequired": true
       },

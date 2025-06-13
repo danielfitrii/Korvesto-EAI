@@ -15,6 +15,35 @@
             "description": "OK"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Customers/{id}": {
@@ -39,14 +68,14 @@
         }
       }
     },
-    "/api/Customers/{customerName}/add-points/{points}": {
+    "/api/Customers/{customerId}/add-points/{points}": {
       "post": {
         "tags": [
           "Customers"
         ],
         "parameters": [
           {
-            "name": "customerName",
+            "name": "customerId",
             "in": "path",
             "required": true,
             "schema": {
@@ -112,6 +141,28 @@
   },
   "components": {
     "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "loyaltyPoints": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {

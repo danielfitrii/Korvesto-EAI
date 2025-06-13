@@ -7,12 +7,7 @@ namespace Warehouse_API.Controllers
     [Route("api/[controller]")]
     public class StockController : ControllerBase
     {
-        private static Dictionary<string, int> _stockLevels = new()
-        {
-            { "P001", 50 },
-            { "P002", 30 },
-            { "P003", 75 }
-        };
+        private static Dictionary<string, int> _stockLevels = new();
 
         [HttpGet]
         public IActionResult GetAllStock()
@@ -27,6 +22,20 @@ namespace Warehouse_API.Controllers
                 return NotFound("Product not found.");
 
             _stockLevels[productCode] -= quantity;
+            return Ok(new { ProductCode = productCode, RemainingStock = _stockLevels[productCode] });
+        }
+
+        [HttpPost("{productCode}/add/{quantity}")]
+        public IActionResult AddStock(string productCode, int quantity)
+        {
+            if (!_stockLevels.ContainsKey(productCode))
+            {
+                _stockLevels[productCode] = quantity;
+            }
+            else
+            {
+                _stockLevels[productCode] += quantity;
+            }
             return Ok(new { ProductCode = productCode, RemainingStock = _stockLevels[productCode] });
         }
     }

@@ -14,14 +14,21 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="NewSale.CustomerId" class="form-label">Customer ID</label>
+                        <input asp-for="NewSale.CustomerId" class="form-control" placeholder="e.g., C001" />
+                        <span asp-validation-for="NewSale.CustomerId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label asp-for="NewSale.CustomerName" class="form-label">Customer Name</label>
                         <input asp-for="NewSale.CustomerName" class="form-control" />
                         <span asp-validation-for="NewSale.CustomerName" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label asp-for="NewSale.Date" class="form-label">Date</label>
                         <input asp-for="NewSale.Date" class="form-control" type="date" />

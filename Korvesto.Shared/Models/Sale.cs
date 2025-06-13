@@ -2,19 +2,19 @@
 {
     public class Sale
     {
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public string CustomerName { get; set; }
-        public List<SaleItem> Items { get; set; }
+        public string Id { get; set; }
+        public string CustomerId { get; set; }
+        public DateTime SaleDate { get; set; }
         public decimal TotalAmount { get; set; }
+        public List<SaleItem> Items { get; set; } = new List<SaleItem>();
     }
 
     public class SaleItem
     {
-        public string ProductCode { get; set; }
-        public string ProductName { get; set; }
+        public string ProductId { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 
     public class Customer

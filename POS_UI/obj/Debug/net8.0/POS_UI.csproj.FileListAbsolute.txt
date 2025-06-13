@@ -18,6 +18,7 @@ C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.csproj.C
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.RazorAssemblyInfo.cache
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.RazorAssemblyInfo.cs
+C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.sourcelink.json
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -28,7 +29,6 @@ C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\staticwebassets
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.csproj.Up2Date
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\POS_UI.dll
 C:\Users\danie\source\repos\Korvesto_EAI\POS_UI\obj\Debug\net8.0\refint\POS_UI.dll

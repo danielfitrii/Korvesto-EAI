@@ -11,6 +11,27 @@
   },
   {
     "ContainingType": "Warehouse_API.Controllers.StockController",
+    "Method": "AddStock",
+    "RelativePath": "api/Stock/{productCode}/add/{quantity}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productCode",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API.Controllers.StockController",
     "Method": "DeductStock",
     "RelativePath": "api/Stock/{productCode}/deduct/{quantity}",
     "HttpMethod": "POST",

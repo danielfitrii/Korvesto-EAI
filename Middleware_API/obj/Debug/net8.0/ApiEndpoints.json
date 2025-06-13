@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "Middleware_API.Controllers.MiddlewareController",
+    "Method": "GetActivityLogs",
+    "RelativePath": "api/Middleware/activity-logs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Middleware_API.Controllers.MiddlewareController",
     "Method": "ProcessSalesAndUpdateStock",
     "RelativePath": "api/Middleware/process-sales",
     "HttpMethod": "GET",

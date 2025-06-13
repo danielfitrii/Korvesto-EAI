@@ -20,6 +20,7 @@ C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehous
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.csproj.CoreCompileInputs.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.sourcelink.json
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -28,11 +29,10 @@ C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwe
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehous.2C493CFA.Up2Date
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.dll
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\refint\Warehouse_API.dll
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.genruntimeconfig.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\ref\Warehouse_API.dll
-C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.sourcelink.json
+C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

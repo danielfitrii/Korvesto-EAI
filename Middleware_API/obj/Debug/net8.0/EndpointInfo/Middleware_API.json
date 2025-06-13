@@ -5,6 +5,18 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Middleware/activity-logs": {
+      "get": {
+        "tags": [
+          "Middleware"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Middleware/sales": {
       "get": {
         "tags": [
