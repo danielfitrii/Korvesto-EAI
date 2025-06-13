@@ -39,6 +39,18 @@
         }
       }
     },
+    "/api/Products/routes": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Sales": {
       "get": {
         "tags": [

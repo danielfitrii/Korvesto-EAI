@@ -2,7 +2,7 @@
 {
     public class Sale
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public string CustomerId { get; set; }
         public DateTime SaleDate { get; set; }
         public decimal TotalAmount { get; set; }

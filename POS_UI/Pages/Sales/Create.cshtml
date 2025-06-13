@@ -1,0 +1,136 @@
+@page
+@model POS_UI.Pages.Sales.CreateModel
+@{
+    ViewData["Title"] = "New Sale";
+}
+
+<div class="container mt-4">
+    <h1>New Sale</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Sale.CustomerId" class="control-label">Customer ID</label>
+                            <input asp-for="Sale.CustomerId" class="form-control" />
+                            <span asp-validation-for="Sale.CustomerId" class="text-danger"></span>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5 class="mb-0">Sale Items</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="saleItems">
+                                    <div class="sale-item mb-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Product</label>
+                                                <select class="form-select product-select" name="Sale.Items[0].ProductId">
+                                                    <option value="">Select a product</option>
+                                                    @foreach (var product in Model.Products)
+                                                    {
+                                                        <option value="@product.Id" data-price="@product.Price">@product.Name - @product.Price.ToString("C")</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label">Quantity</label>
+                                                <input type="number" class="form-control quantity-input" name="Sale.Items[0].Quantity" min="1" value="1" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label">Unit Price</label>
+                                                <input type="number" class="form-control unit-price" name="Sale.Items[0].UnitPrice" readonly />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="control-label">Total</label>
+                                                <input type="number" class="form-control item-total" name="Sale.Items[0].TotalPrice" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" id="addItem">Add Another Item</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label">Total Amount</label>
+                            <input type="number" class="form-control" id="totalAmount" name="Sale.TotalAmount" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Create Sale</button>
+                            <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            let itemCount = 1;
+
+            function updateItemTotal(item) {
+                const quantity = parseInt($(item).find('.quantity-input').val()) || 0;
+                const unitPrice = parseFloat($(item).find('.unit-price').val()) || 0;
+                const total = quantity * unitPrice;
+                $(item).find('.item-total').val(total.toFixed(2));
+                updateTotalAmount();
+            }
+
+            function updateTotalAmount() {
+                let total = 0;
+                $('.item-total').each(function () {
+                    total += parseFloat($(this).val()) || 0;
+                });
+                $('#totalAmount').val(total.toFixed(2));
+            }
+
+            function updateUnitPrice(selectElement) {
+                const price = $(selectElement).find(':selected').data('price') || 0;
+                $(selectElement).closest('.sale-item').find('.unit-price').val(price.toFixed(2));
+                updateItemTotal($(selectElement).closest('.sale-item'));
+            }
+
+            $(document).on('change', '.product-select', function () {
+                updateUnitPrice(this);
+            });
+
+            $(document).on('change', '.quantity-input', function () {
+                updateItemTotal($(this).closest('.sale-item'));
+            });
+
+            $('#addItem').click(function () {
+                const newItem = $('.sale-item:first').clone();
+                newItem.find('select, input').val('');
+
+                newItem.find('.product-select').attr('name', `Sale.Items[${itemCount}].ProductId`);
+                newItem.find('.quantity-input').attr('name', `Sale.Items[${itemCount}].Quantity`);
+                newItem.find('.unit-price').attr('name', `Sale.Items[${itemCount}].UnitPrice`);
+                newItem.find('.item-total').attr('name', `Sale.Items[${itemCount}].TotalPrice`);
+                
+                newItem.find('.quantity-input').val('1');
+                newItem.find('.unit-price').val('0.00');
+                newItem.find('.item-total').val('0.00');
+
+                $('#saleItems').append(newItem);
+                itemCount++;
+
+                updateTotalAmount();
+            });
+
+            $('.product-select').each(function() {
+                updateUnitPrice(this);
+            });
+            updateTotalAmount();
+        });
+    </script>
+} 

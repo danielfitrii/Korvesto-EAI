@@ -28,6 +28,19 @@ namespace POS_API.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Sale sale)
         {
+            Console.WriteLine($"API Received Sale: {(sale != null ? "Not Null" : "Null")}");
+            if (sale != null)
+            {
+                Console.WriteLine($"API Received CustomerId: {sale.CustomerId ?? "Null"}");
+                Console.WriteLine($"API Received Items Count: {sale.Items?.Count ?? 0}");
+            }
+
+            // Check model state for any binding or validation errors
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (sale == null)
                 return BadRequest("Sale data is required");
 

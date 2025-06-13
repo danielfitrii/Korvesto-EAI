@@ -26,6 +26,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "POS_API.Controllers.ProductsController",
+    "Method": "GetAllRoutes",
+    "RelativePath": "api/Products/routes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "POS_API.Controllers.SalesController",
     "Method": "GetAll",
     "RelativePath": "api/Sales",

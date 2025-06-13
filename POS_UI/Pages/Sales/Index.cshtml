@@ -1,0 +1,59 @@
+@page
+@model POS_UI.Pages.Sales.IndexModel
+@{
+    ViewData["Title"] = "Sales List";
+}
+
+<div class="container mt-4">
+    <h1>Sales List</h1>
+
+    @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <p><a asp-page="./Create" class="btn btn-primary">Create New Sale</a></p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sale ID</th>
+                                    <th>Customer ID</th>
+                                    <th>Sale Date</th>
+                                    <th>Total Amount</th>
+                                    <th>Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sale in Model.Sales)
+                                {
+                                    <tr>
+                                        <td>@sale.Id</td>
+                                        <td>@sale.CustomerId</td>
+                                        <td>@sale.SaleDate.ToShortDateString() @sale.SaleDate.ToShortTimeString()</td>
+                                        <td>@sale.TotalAmount.ToString("C")</td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var item in sale.Items)
+                                                {
+                                                    <li>@item.Quantity x @item.ProductId (@item.TotalPrice.ToString("C"))</li>
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

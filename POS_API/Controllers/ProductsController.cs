@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Korvesto.Shared.Models;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace POS_API.Controllers
 {
@@ -7,6 +10,13 @@ namespace POS_API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
+        private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
+
+        public ProductsController(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider)
+        {
+            _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
+        }
+
         private static List<Product> _products = new()
         {
             new Product 
@@ -49,6 +59,22 @@ namespace POS_API.Controllers
                 return NotFound();
 
             return Ok(product);
+        }
+
+        [HttpGet("routes")]
+        public IActionResult GetAllRoutes()
+        {
+            var routes = _actionDescriptorCollectionProvider.ActionDescriptors.Items
+                .Where(ad => ad.AttributeRouteInfo != null)
+                .Select(ad => new 
+                {
+                    Method = ad.ActionConstraints?.OfType<HttpMethodActionConstraint>().FirstOrDefault()?.HttpMethods.FirstOrDefault() ?? "Any",
+                    Template = ad.AttributeRouteInfo.Template,
+                    DisplayName = ad.DisplayName
+                })
+                .OrderBy(r => r.Template)
+                .ToList();
+            return Ok(routes);
         }
     }
 } 

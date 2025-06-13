@@ -31,6 +31,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Incoming Request: {context.Request.Method} {context.Request.Path}");
+    await next();
+});
+
 app.UseCors();
 app.UseAuthorization();
 
