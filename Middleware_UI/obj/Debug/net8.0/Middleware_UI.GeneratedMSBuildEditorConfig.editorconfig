@@ -20,10 +20,6 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Dashboard/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,14 +34,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Sales/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Sales/SaleDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXNcU2FsZURldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Sales/SaleForm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXNcU2FsZUZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/danie/source/repos/Korvesto_EAI/Middleware_UI/Pages/Shared/_ValidationScriptsPartial.cshtml]

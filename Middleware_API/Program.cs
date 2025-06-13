@@ -6,24 +6,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure HTTP Clients for other APIs
+// Add HTTP clients for each service
+builder.Services.AddHttpClient("CRMApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:CRMApiUrl"] ?? "https://localhost:7069");
+});
+
 builder.Services.AddHttpClient("POSApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:POSApiUrl"] ?? "https://localhost:7001");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:PosApiUrl"] ?? "https://localhost:7197");
 });
 
 builder.Services.AddHttpClient("WarehouseApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:WarehouseApiUrl"] ?? "https://localhost:7002");
-});
-
-builder.Services.AddHttpClient("CRMApi", client =>
-{
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:CRMApiUrl"] ?? "https://localhost:7003");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:WarehouseApiUrl"] ?? "https://localhost:7227");
 });
 
 // Add CORS

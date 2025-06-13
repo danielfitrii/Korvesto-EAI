@@ -35,4 +35,3 @@ C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\refint\W
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.pdb
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\Warehouse_API.genruntimeconfig.cache
 C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\ref\Warehouse_API.dll
-C:\Users\danie\source\repos\Korvesto_EAI\Warehouse_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

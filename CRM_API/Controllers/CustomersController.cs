@@ -27,6 +27,15 @@ namespace CRM_API.Controllers
                 Phone = "098-765-4321",
                 LoyaltyPoints = 250,
                 JoinDate = DateTime.UtcNow.AddMonths(-2)
+            },
+            new Customer 
+            { 
+                CustomerId = "CUST007", 
+                Name = "Mystery Customer", 
+                Email = "cust007@example.com",
+                Phone = "777-777-7777",
+                LoyaltyPoints = 0,
+                JoinDate = DateTime.UtcNow
             }
         };
 

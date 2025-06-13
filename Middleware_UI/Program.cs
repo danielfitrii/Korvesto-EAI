@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Middleware_UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,12 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 // Configure HTTP client for Middleware API
-builder.Services.AddHttpClient("MiddlewareAPI", client =>
+builder.Services.AddHttpClient("MiddlewareApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:MiddlewareApiUrl"] ?? "https://localhost:7000");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:MiddlewareApiUrl"] ?? "https://localhost:7146");
     client.DefaultRequestHeaders.Accept.Clear();
     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 });
+
+// Register services
+builder.Services.AddScoped<MiddlewareService>();
 
 var app = builder.Build();
 
