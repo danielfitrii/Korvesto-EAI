@@ -1,0 +1,52 @@
+@page "{id}"
+@model CRM_UI.Pages.Customers.DetailsModel
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">Customer Details</h2>
+                </div>
+                <div class="card-body">
+                    @if (Model.Customer != null)
+                    {
+                        <dl class="row">
+                            <dt class="col-sm-3">Customer ID</dt>
+                            <dd class="col-sm-9">@Model.Customer.CustomerId</dd>
+
+                            <dt class="col-sm-3">Name</dt>
+                            <dd class="col-sm-9">@Model.Customer.Name</dd>
+
+                            <dt class="col-sm-3">Email</dt>
+                            <dd class="col-sm-9">@Model.Customer.Email</dd>
+
+                            <dt class="col-sm-3">Phone</dt>
+                            <dd class="col-sm-9">@Model.Customer.Phone</dd>
+
+                            <dt class="col-sm-3">Loyalty Points</dt>
+                            <dd class="col-sm-9">@Model.Customer.LoyaltyPoints</dd>
+
+                            <dt class="col-sm-3">Join Date</dt>
+                            <dd class="col-sm-9">@Model.Customer.JoinDate.ToShortDateString()</dd>
+                        </dl>
+
+                        <div class="mt-3">
+                            <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            Customer not found.
+                        </div>
+                        <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

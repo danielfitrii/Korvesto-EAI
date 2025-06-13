@@ -69,5 +69,31 @@ namespace CRM_UI.Services
                 return null;
             }
         }
+
+        public async Task<Customer?> CreateCustomerAsync(Customer customer)
+        {
+            try
+            {
+                _logger.LogInformation($"Attempting to create customer: {customer.CustomerId}");
+                var response = await _httpClient.PostAsJsonAsync("api/Customers", customer);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Failed to create customer. Status code: {response.StatusCode}");
+                    return null;
+                }
+
+                var content = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation($"Received response: {content}");
+
+                var createdCustomer = await response.Content.ReadFromJsonAsync<Customer>();
+                return createdCustomer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating customer");
+                return null;
+            }
+        }
     }
 } 
