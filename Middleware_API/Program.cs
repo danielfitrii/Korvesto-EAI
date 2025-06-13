@@ -15,14 +15,14 @@ builder.Services.AddHttpClient("CRMApi", client =>
     client.BaseAddress = new Uri(builder.Configuration["ApiSettings:CRMApiUrl"] ?? "https://localhost:7069");
 });
 
-builder.Services.AddHttpClient("POSApi", client =>
+builder.Services.AddHttpClient("StoreTrackApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:PosApiUrl"] ?? "https://localhost:7197");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:StoreTrackApiUrl"] ?? "https://localhost:7197");
 });
 
-builder.Services.AddHttpClient("WarehouseApi", client =>
+builder.Services.AddHttpClient("WarehouseFlowApi", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:WarehouseApiUrl"] ?? "https://localhost:7227");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:WarehouseFlowApiUrl"] ?? "https://localhost:7227");
 });
 
 // Add CORS

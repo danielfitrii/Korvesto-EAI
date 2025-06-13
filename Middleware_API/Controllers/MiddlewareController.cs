@@ -88,7 +88,7 @@ namespace Middleware_API.Controllers
                 }
 
                 // 2. Check product availability and update stock
-                var warehouseClient = _httpClientFactory.CreateClient("WarehouseApi");
+                var warehouseClient = _httpClientFactory.CreateClient("WarehouseFlowApi");
                 foreach (var item in sale.Items)
                 {
                     _logger.LogInformation($"Middleware_API: Checking stock for ProductId: {item.ProductId}");
@@ -123,7 +123,7 @@ namespace Middleware_API.Controllers
                 }
 
                 // 3. Record the sale
-                var posClient = _httpClientFactory.CreateClient("POSApi");
+                var posClient = _httpClientFactory.CreateClient("StoreTrackApi");
                 var saleResponse = await posClient.PostAsJsonAsync("api/Sales", sale);
                 if (!saleResponse.IsSuccessStatusCode)
                 {
